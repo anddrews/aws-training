@@ -10,7 +10,12 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint --ignore-path .gitignore --fix src",
-    "prettier": "prettier src --write"
+    "prettier": "prettier src --write",
+    "upload:s3": "sls client deploy --no-config-change --no-policy-change --no-cors-change --no-confirm",
+    "invalidateCache": "sls invalidateCloudFrontCache",
+    "deploy": "npm run build & npm run upload:s3 & npm run invalidateCache",
+    "cloudfront:setup": "sls deploy",
+    "cloudfront:remove": "sls remove"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -45,6 +50,9 @@
     "jsdom": "^20.0.0",
     "msw": "^0.43.1",
     "prettier": "2.7.1",
+    "serverless": "^3.38.0",
+    "serverless-finch": "^4.0.4",
+    "serverless-s3-cleaner": "^2.0.2",
     "typescript": "^4.7.4",
     "vite": "^5.1.6",
     "vitest": "^0.17.1"
