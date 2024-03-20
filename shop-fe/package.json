@@ -1,6 +1,9 @@
 {
   "name": "@my-store-app/fe",
   "version": "1.0.0",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
@@ -13,15 +16,15 @@
     "upload:s3": "sls client deploy --no-config-change --no-policy-change --no-cors-change --no-confirm",
     "invalidateCache": "sls invalidateCloudFrontCache",
     "deploy": "npm run build & npm run upload:s3 & npm run invalidateCache",
-    "cloudfoundation:setup": "sls deploy",
-    "cloudfoundation:remove": "sls remove"
+    "infrastructure:setup": "sls deploy",
+    "infrastructure:remove": "sls remove"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
-    "@mui/styles": "^5.8.7",
+    "@mui/styles": "^5.15.14",
     "@types/yup": "^0.29.14",
     "axios": "^1.6.7",
     "formik": "^2.2.9",
@@ -46,11 +49,9 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
-    "headers-polyfill": "^3.2.5",
     "jsdom": "^20.0.0",
     "msw": "^0.43.1",
     "prettier": "2.7.1",
-    "serverless": "^3.38.0",
     "serverless-finch": "^4.0.4",
     "serverless-s3-cleaner": "^2.0.2",
     "typescript": "^4.7.4",

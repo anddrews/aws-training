@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "workspaces": [
-    "shop-fe/**/*",
+    "shop-fe/",
     "shop-be/**/*"
   ],
   "description": "AWS training repo",
@@ -11,7 +11,11 @@
   "scripts": {
     "setupInfrastructure:fe": "npm run cloudfoundation:setup --workspace=@my-store-app/fe",
     "deploy:fe": " npm run deploy --workspace=@my-store-app/fe",
+    "deploy:products": " npm run deploy --workspace=@my-store-app/products",
     "cleanInfrastructure": "npm run cloudfoundation:remove --workspace=@my-store-app/fe"
+  },
+  "devDependencies": {
+    "serverless": "^3.38.0"
   },
   "repository": {
     "type": "git",
