@@ -1,66 +1,26 @@
 {
-  "name": "my-store-app",
-  "version": "1.0.0",
+  "name": "@my-store-app/main",
   "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "shop-fe/**/*",
+    "shop-be/**/*"
+  ],
+  "description": "AWS training repo",
+  "main": "index.js",
   "scripts": {
-    "start": "vite",
-    "build": "tsc && vite build",
-    "preview": "npm run build && vite preview",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage",
-    "lint": "eslint --ignore-path .gitignore --fix src",
-    "prettier": "prettier src --write",
-    "upload:s3": "sls client deploy --no-config-change --no-policy-change --no-cors-change --no-confirm",
-    "invalidateCache": "sls invalidateCloudFrontCache",
-    "deploy": "npm run build & npm run upload:s3 & npm run invalidateCache",
-    "cloudfront:setup": "sls deploy",
-    "cloudfront:remove": "sls remove"
+    "setupInfrastructure:fe": "npm run cloudfoundation:setup --workspace=@my-store-app/fe",
+    "deploy:fe": " npm run deploy --workspace=@my-store-app/fe",
+    "cleanInfrastructure": "npm run cloudfoundation:remove --workspace=@my-store-app/fe"
   },
-  "dependencies": {
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.7",
-    "@mui/styles": "^5.8.7",
-    "@types/yup": "^0.29.14",
-    "axios": "^1.6.7",
-    "formik": "^2.2.9",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-query": "^3.39.1",
-    "react-router-dom": "^6.3.0",
-    "yup": "^0.32.11"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anddrews/aws-training.git"
   },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.1",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.30.5",
-    "@typescript-eslint/parser": "^5.30.5",
-    "@vitejs/plugin-react": "^1.3.2",
-    "@vitest/ui": "^0.18.0",
-    "c8": "^7.11.3",
-    "eslint": "^8.19.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.30.1",
-    "jsdom": "^20.0.0",
-    "msw": "^0.43.1",
-    "prettier": "2.7.1",
-    "serverless": "^3.38.0",
-    "serverless-finch": "^4.0.4",
-    "serverless-s3-cleaner": "^2.0.2",
-    "typescript": "^4.7.4",
-    "vite": "^5.1.6",
-    "vitest": "^0.17.1"
+  "author": "Andrei Kandratsenka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anddrews/aws-training/issues"
   },
-  "msw": {
-    "workerDirectory": "public"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  }
+  "homepage": "https://github.com/anddrews/aws-training#readme"
 }
