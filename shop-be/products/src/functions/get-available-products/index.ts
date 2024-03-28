@@ -6,11 +6,11 @@ export default {
     {
       http: {
         method: 'get',
-        path: '/product/available',
+        path: '/products/available',
         cors: true,
         responses: {
           200: {
-            bodyType: 'Product'
+            bodyType: 'TAvailableProduct'
           }
         }
       },

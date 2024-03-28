@@ -1,7 +1,6 @@
 import type { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from "aws-lambda"
-import type { FromSchema } from "json-schema-to-ts";
 
-type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & { body: FromSchema<S> }
+type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & { body: S }
 export type ValidatedEventAPIGatewayProxyEvent<S = unknown> = Handler<ValidatedAPIGatewayProxyEvent<S>, APIGatewayProxyResult>
 
 
@@ -23,6 +22,20 @@ export const formatJSONResponse = {
       headers,
       statusCode: 404,
       body: JSON.stringify({error: message})
+    }
+  },
+  _400 (message: string) {
+    return {
+      headers,
+      statusCode: 400,
+      body: JSON.stringify({error: message})
+    }
+  },
+  _500 () {
+    return {
+      headers,
+      statusCode: 50,
+      body: JSON.stringify({error: 'Internal error'})
     }
   }
 }

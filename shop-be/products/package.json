@@ -5,6 +5,7 @@
   "main": "serverless.ts",
   "scripts": {
     "test": "jest --config ./jest.config.js",
+    "mock:data": "node upload-mock-data.js",
     "deploy": "sls deploy",
     "infrastructure:remove": "sls remove"
   },
@@ -14,10 +15,16 @@
   "dependencies": {
     "@middy/core": "^3.4.0",
     "@middy/http-json-body-parser": "^3.4.0",
+    "@my-store-app/fe": "*",
+    "dynamoose": "^4.0.0",
+    "dynamoose-utils": "^4.0.0",
     "serverless-auto-swagger": "^2.12.0",
-    "@my-store-app/fe": "*"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.540.0",
+    "@aws-sdk/credential-providers": "^3.540.0",
+    "@aws-sdk/lib-dynamodb": "^3.540.0",
     "@jest/globals": "^29.7.0",
     "@serverless/typescript": "^3.0.0",
     "@types/aws-lambda": "^8.10.71",
