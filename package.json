@@ -12,10 +12,12 @@
     "setupInfrastructure:fe": "npm run cloudfoundation:setup --workspace=@my-store-app/fe",
     "deploy:fe": " npm run deploy --workspace=@my-store-app/fe",
     "deploy:products": " npm run deploy --workspace=@my-store-app/products",
-    "cleanInfrastructure": "npm run cloudfoundation:remove --workspace=@my-store-app/fe"
+    "cleanInfrastructure": "npm run infrastructure:remove --workspace=@my-store-app/fe & npm run infrastructure:remove --workspace=@my-store-app/products & npm run infrastructure:remove --workspace=@my-store-app/import"
   },
   "devDependencies": {
-    "serverless": "^3.38.0"
+    "prettier": "^3.2.5",
+    "serverless": "^3.38.0",
+    "typescript": "^4.7.4"
   },
   "repository": {
     "type": "git",

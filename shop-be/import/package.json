@@ -1,11 +1,10 @@
 {
-  "name": "@my-store-app/products",
+  "name": "@my-store-app/import",
   "version": "1.0.0",
-  "description": "Product service",
+  "description": "Import service",
   "main": "serverless.ts",
   "scripts": {
     "test": "jest --config ./jest.config.js",
-    "mock:data": "node upload-mock-data.js",
     "deploy": "sls deploy",
     "infrastructure:remove": "sls remove"
   },
@@ -13,26 +12,22 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.540.0",
+    "@aws-sdk/s3-request-presigner": "^3.540.0",
     "@middy/core": "^3.4.0",
     "@middy/http-json-body-parser": "^3.4.0",
-    "dynamoose": "^4.0.0",
-    "dynamoose-utils": "^4.0.0",
-    "serverless-auto-swagger": "^2.12.0",
-    "uuid": "^9.0.1"
+    "csv-parser": "^3.0.0"
   },
   "devDependencies": {
-    "@aws-sdk/client-dynamodb": "^3.540.0",
-    "@aws-sdk/credential-providers": "^3.540.0",
-    "@aws-sdk/lib-dynamodb": "^3.540.0",
     "@jest/globals": "^29.7.0",
     "@serverless/typescript": "^3.0.0",
     "@types/aws-lambda": "^8.10.71",
     "@types/jest": "^29.5.12",
     "@types/node": "^14.14.25",
+    "aws-sdk-client-mock": "^4.0.0",
     "esbuild": "^0.14.11",
     "jest": "^29.7.0",
     "json-schema-to-ts": "^1.5.0",
-    "prettier": "^3.2.5",
     "serverless-esbuild": "^1.23.3",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.4.0",
