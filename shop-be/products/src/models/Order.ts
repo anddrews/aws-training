@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { OrderStatus } from "~/constants/order";
+import { OrderStatus } from "@constants/order";
 
 export const AddressSchema = Yup.object({
   firstName: Yup.string().required().default(""),
