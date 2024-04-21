@@ -1,17 +1,17 @@
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { fromIni } = require("@aws-sdk/credential-providers")
+const { fromIni } = require("@aws-sdk/credential-providers");
 const {
   BatchWriteCommand,
   DynamoDBDocumentClient,
 } = require("@aws-sdk/lib-dynamodb");
 
-const products = require('./mocks/products.json');
+const products = require("./mocks/products.json");
 
 const client = new DynamoDBClient({
   credentials: fromIni({
     profile: "awsTraining",
     filepath: "c:/Users/Andrei_Kandratsenka/.aws/credentials",
-    clientConfig: { region: 'eu-west-1' },
+    clientConfig: { region: "eu-west-1" },
   }),
 });
 const docClient = DynamoDBDocumentClient.from(client);
@@ -22,8 +22,14 @@ function* chunkArray(arr, stride = 1) {
 }
 
 const main = async () => {
-  const productsChunks = chunkArray(products.map(({count, ...rest}) => rest), 25);
-  const stockChunks = chunkArray(products.map(({count, id: product_id}) => ({product_id, count})), 25);
+  const productsChunks = chunkArray(
+    products.map(({ count, ...rest }) => rest),
+    25
+  );
+  const stockChunks = chunkArray(
+    products.map(({ count, id: product_id }) => ({ product_id, count })),
+    25
+  );
 
   for (const chunk of productsChunks) {
     const putRequests = chunk.map((product) => ({

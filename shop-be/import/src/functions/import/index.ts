@@ -5,14 +5,9 @@ export default {
   events: [
     {
       http: {
-        method: "post",
-        path: "/products",
+        method: "get",
+        path: "/import",
         cors: true,
-        responses: {
-          200: {
-            bodyType: "TAvailableProduct",
-          },
-        },
       },
     },
   ],
