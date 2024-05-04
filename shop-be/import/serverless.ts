@@ -28,6 +28,7 @@ const serverlessConfiguration: AWS = {
       basePath: `/${("opt:stage", "dev")}`,
       excludeStages: ["production"],
     },
+    authorizerArn: { "Fn::ImportValue": "BasicAuthorizerArn" },
   },
   provider: {
     name: "aws",
@@ -122,6 +123,17 @@ const serverlessConfiguration: AWS = {
           FilterPolicy: {
             ProductsLength: ["LongList"],
           },
+        },
+      },
+      GatewayResponse: {
+        Type: "AWS::ApiGateway::GatewayResponse",
+        Properties: {
+          ResponseParameters: {
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+          },
+          ResponseType: "ACCESS_DENIED",
+          RestApiId: { Ref: "ApiGatewayRestApi" },
         },
       },
     },

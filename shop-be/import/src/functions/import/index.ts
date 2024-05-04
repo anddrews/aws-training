@@ -8,6 +8,13 @@ export default {
         method: "get",
         path: "/import",
         cors: true,
+        authorizer: {
+          name: "BasicAuthorizer",
+          arn: "${self:custom.authorizerArn}",
+          resultTtlInSeconds: 0,
+          identitySource: "method.request.header.Authorization",
+          type: "token",
+        },
       },
     },
   ],
