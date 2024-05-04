@@ -39,8 +39,12 @@ const serverlessConfiguration: AWS = {
       shouldStartNameWithService: true,
     },
     environment: {
-      AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
-      NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
+      SQS_FILE_IMPORT: { Ref: "SQSQueue" },
+      REGION: "${self:provider.region}",
+      BUCKET_NAME: "${self:custom.bucketName}",
+      TOPIC_ARN: {
+        Ref: "SNSTopic",
+      },
     },
     iamRoleStatements: [
       {
@@ -52,6 +56,20 @@ const serverlessConfiguration: AWS = {
         Effect: "Allow",
         Action: ["s3:ListBucket"],
         Resource: "arn:aws:s3:::${self:custom.bucketName}",
+      },
+      {
+        Effect: "Allow",
+        Action: ["sqs:*"],
+        Resource: {
+          "Fn::GetAtt": ["SQSQueue", "Arn"],
+        },
+      },
+      {
+        Effect: "Allow",
+        Action: ["sns:*"],
+        Resource: {
+          Ref: "SNSTopic",
+        },
       },
     ],
   },
@@ -70,6 +88,54 @@ const serverlessConfiguration: AWS = {
               },
             ],
           },
+        },
+      },
+      SQSQueue: {
+        Type: "AWS::SQS::Queue",
+        Properties: {
+          QueueName: "aws-training-sqs-queue",
+        },
+      },
+      SNSTopic: {
+        Type: "AWS::SNS::Topic",
+        Properties: {
+          TopicName: "aws-training-sns-topic",
+        },
+      },
+      SNSSubscriptionString: {
+        Type: "AWS::SNS::Subscription",
+        Properties: {
+          Endpoint: "foltivarka@gufum.com",
+          Protocol: "email",
+          TopicArn: { Ref: "SNSTopic" },
+          FilterPolicy: {
+            ProductsLength: ["ShortList"],
+          },
+        },
+      },
+      SNSSubscriptionBoolean: {
+        Type: "AWS::SNS::Subscription",
+        Properties: {
+          Endpoint: "yudeibautibru-5363@yopmail.com",
+          Protocol: "email",
+          TopicArn: { Ref: "SNSTopic" },
+          FilterPolicy: {
+            ProductsLength: ["LongList"],
+          },
+        },
+      },
+    },
+    Outputs: {
+      ImportProductQueueUrl: {
+        Value: { Ref: "SQSQueue" },
+        Export: {
+          Name: "ImportProductQueueUrl",
+        },
+      },
+      ImportProductQueueArn: {
+        Value: { "Fn::GetAtt": ["SQSQueue", "Arn"] },
+        Export: {
+          Name: "ImportProductQueueArn",
         },
       },
     },

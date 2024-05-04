@@ -4,11 +4,9 @@ export default {
   handler: `${handlerPath(__dirname)}/handler.main`,
   events: [
     {
-      s3: {
-        bucket: "${self:custom.bucketName}",
-        event: "s3:ObjectCreated:*",
-        rules: [{ prefix: "upload/" }],
-        existing: true,
+      sqs: {
+        batchSize: 5,
+        arn: { "Fn::ImportValue": "ImportProductQueueArn" },
       },
     },
   ],

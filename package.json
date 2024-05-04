@@ -28,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/anddrews/aws-training/issues"
   },
-  "homepage": "https://github.com/anddrews/aws-training#readme"
+  "homepage": "https://github.com/anddrews/aws-training#readme",
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.552.0"
+  }
 }
